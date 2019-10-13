@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:meals/screens/category_item_screens.dart';
 
 class CategoryItem extends StatelessWidget {
   final String categoryId;
@@ -30,7 +31,8 @@ class CategoryItem extends StatelessWidget {
           ),
         ),
       ),
-      onTap: () => Navigator.of(context).pushNamed('/categorypage', arguments: {
+      onTap: () => Navigator.of(context)
+          .pushNamed(CategoryItemScreens.routeName, arguments: {
         'categoryTitle': categoryTitle,
         'categoryId': categoryId
       }),

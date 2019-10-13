@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 
 import '../models/meal.dart';
+import '../screens/meal_detail_screen.dart';
+import './Simpler/info_bar.dart';
 
 class MealItem extends StatelessWidget {
+  final String id;
   final String title;
   final String imageUrl;
   final int duration;
@@ -10,6 +13,7 @@ class MealItem extends StatelessWidget {
   final Affordability affordability;
 
   MealItem({
+    @required this.id,
     @required this.title,
     @required this.imageUrl,
     @required this.duration,
@@ -17,46 +21,14 @@ class MealItem extends StatelessWidget {
     @required this.affordability,
   });
 
-  String get complexityText {
-    switch (complexity) {
-      case Complexity.Simple:
-        return 'Simple';
-        break;
-      case Complexity.Challenging:
-        return 'Challenging';
-        break;
-      case Complexity.Hard:
-        return 'Hard';
-        break;
-      default:
-        return 'Unknown';
-        break;
-    }
+  void submitTap(BuildContext context) {
+    Navigator.of(context).pushNamed(MealDetailScreen.routeName, arguments: id);
   }
-
-  String get affordabilityText {
-    switch (affordability) {
-      case Affordability.Affordable:
-        return 'Affordable';
-        break;
-      case Affordability.Pricey:
-        return 'Pricey';
-        break;
-      case Affordability.Luxurious:
-        return 'Luxurious';
-        break;
-      default:
-        return 'Unknown';
-        break;
-    }
-  }
-
-  void submitTap() {}
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: submitTap,
+      onTap: () => submitTap(context),
       child: Card(
         elevation: 5,
         margin: EdgeInsets.all(10),
@@ -98,35 +70,11 @@ class MealItem extends StatelessWidget {
                 ),
               ],
             ),
-            Padding(
-              padding: EdgeInsets.all(10),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: <Widget>[
-                  Row(
-                    children: <Widget>[
-                      Icon(Icons.schedule),
-                      SizedBox(width: 5),
-                      Text('$duration mins'),
-                    ],
-                  ),
-                  Row(
-                    children: <Widget>[
-                      Icon(Icons.work),
-                      SizedBox(width: 5),
-                      Text(complexityText),
-                    ],
-                  ),
-                  Row(
-                    children: <Widget>[
-                      Icon(Icons.attach_money),
-                      SizedBox(width: 5),
-                      Text(affordabilityText),
-                    ],
-                  ),
-                ],
-              ),
-            )
+            InfoBar(
+              duration: duration,
+              complexity: complexity,
+              affordability: affordability,
+            ),
           ],
         ),
       ),
