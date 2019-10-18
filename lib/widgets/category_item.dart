@@ -12,6 +12,18 @@ class CategoryItem extends StatelessWidget {
     @required this.categoryColor,
   });
 
+  BoxDecoration _buildBoxDecoration() {
+    return BoxDecoration(
+      borderRadius: BorderRadius.circular(10),
+      color: categoryColor,
+      gradient: LinearGradient(
+        colors: [categoryColor.withOpacity(0.7), categoryColor],
+        begin: Alignment.topLeft,
+        end: Alignment.bottomRight,
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -21,15 +33,7 @@ class CategoryItem extends StatelessWidget {
           categoryTitle,
           style: Theme.of(context).textTheme.title,
         ),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
-          color: categoryColor,
-          gradient: LinearGradient(
-            colors: [categoryColor.withOpacity(0.7), categoryColor],
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-          ),
-        ),
+        decoration: _buildBoxDecoration(),
       ),
       onTap: () => Navigator.of(context)
           .pushNamed(CategoryItemScreens.routeName, arguments: {

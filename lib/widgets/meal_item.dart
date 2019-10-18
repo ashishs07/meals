@@ -21,6 +21,39 @@ class MealItem extends StatelessWidget {
     @required this.affordability,
   });
 
+  Widget _buildCardImage() {
+    return ClipRRect(
+      child: Image.network(
+        imageUrl,
+        height: 250,
+        width: double.infinity,
+        fit: BoxFit.cover,
+      ),
+      borderRadius: BorderRadius.only(
+        topLeft: Radius.circular(15),
+        topRight: Radius.circular(15),
+      ),
+    );
+  }
+
+  Widget _buildTextOnImage() {
+    return Container(
+      padding: EdgeInsets.all(5),
+      child: Text(
+        title,
+        style: TextStyle(
+          color: Colors.white,
+          fontFamily: 'Montserrat',
+          fontSize: 22,
+          fontWeight: FontWeight.bold,
+        ),
+        softWrap: true,
+        overflow: TextOverflow.fade,
+      ),
+      color: Colors.black54,
+    );
+  }
+
   void submitTap(BuildContext context) {
     Navigator.of(context).pushNamed(MealDetailScreen.routeName, arguments: id);
   }
@@ -41,33 +74,8 @@ class MealItem extends StatelessWidget {
             Stack(
               alignment: Alignment.bottomCenter,
               children: <Widget>[
-                ClipRRect(
-                  child: Image.network(
-                    imageUrl,
-                    height: 250,
-                    width: double.infinity,
-                    fit: BoxFit.cover,
-                  ),
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(15),
-                    topRight: Radius.circular(15),
-                  ),
-                ),
-                Container(
-                  padding: EdgeInsets.all(5),
-                  child: Text(
-                    title,
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontFamily: 'Montserrat',
-                      fontSize: 22,
-                      fontWeight: FontWeight.bold,
-                    ),
-                    softWrap: true,
-                    overflow: TextOverflow.fade,
-                  ),
-                  color: Colors.black54,
-                ),
+                _buildCardImage(),
+                _buildTextOnImage(),
               ],
             ),
             InfoBar(
