@@ -14,8 +14,8 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Meals App',
       theme: ThemeData(
-        primarySwatch: Colors.pink,
-        accentColor: Color.fromRGBO(52, 131, 235, 1),
+        primarySwatch: Colors.teal,
+        accentColor: Colors.pink,
         canvasColor: Color.fromRGBO(255, 254, 229, 1),
         fontFamily: 'Karla',
         textTheme: TextTheme(
