@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../screens/filters_screen.dart';
+
 class HomeDrawer extends StatelessWidget {
   Widget _buildDrawerListTile(
       BuildContext context, String title, IconData icon, Function tapHandler) {
@@ -37,13 +39,14 @@ class HomeDrawer extends StatelessWidget {
           SizedBox(
             height: 8,
           ),
-          _buildDrawerListTile(context, 'Filters', Icons.restaurant, () {
+          _buildDrawerListTile(context, 'Home', Icons.home, () {
             Navigator.of(context).pushNamed('/');
           }),
           Divider(thickness: 2),
-          _buildDrawerListTile(context, 'Settings', Icons.settings, () {
-            Navigator.of(context).pushNamed('/');
+          _buildDrawerListTile(context, 'Filters', Icons.restaurant, () {
+            Navigator.of(context).pushNamed(FiltersScreen.routeName);
           }),
+          Divider(thickness: 2),
         ],
       ),
     );

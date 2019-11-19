@@ -8,6 +8,11 @@ import './meal_extra_detail.dart';
 class MealDetailScreen extends StatelessWidget {
   static const routeName = '/mealDetailPage';
 
+  final Function toggleFavourite;
+  final Function isFavourite;
+
+  MealDetailScreen(this.toggleFavourite, this.isFavourite);
+
   Widget _buildImageContainer(Meal selectedMeal) {
     return Container(
       height: 300,
@@ -74,53 +79,66 @@ class MealDetailScreen extends StatelessWidget {
     final selectedMeal = DUMMY_MEALS.firstWhere((meal) => meal.id == mealId);
 
     return Scaffold(
-        appBar: AppBar(title: Text(selectedMeal.title)),
-        body: SingleChildScrollView(
-          padding: const EdgeInsets.all(3.0),
-          child: Column(
-            children: <Widget>[
-              _buildImageContainer(selectedMeal),
-              InfoBar(
-                duration: selectedMeal.duration,
-                complexity: selectedMeal.complexity,
-                affordability: selectedMeal.affordability,
+      appBar: AppBar(title: Text(selectedMeal.title)),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.all(3.0),
+        child: Column(
+          children: <Widget>[
+            _buildImageContainer(selectedMeal),
+            InfoBar(
+              duration: selectedMeal.duration,
+              complexity: selectedMeal.complexity,
+              affordability: selectedMeal.affordability,
+            ),
+            InkWell(
+              child: _buildTextContainer(context, 'Ingredients'),
+              onTap: () => Navigator.of(context).push(MaterialPageRoute(
+                  builder: (_) => MealExtraDetail(
+                      _buildIngredientsListView(context, selectedMeal),
+                      selectedMeal.title,
+                      'Ingredients'))),
+            ),
+            Container(
+              padding: const EdgeInsets.all(5),
+              decoration: BoxDecoration(
+                border: Border.all(),
+                borderRadius: BorderRadius.circular(10),
               ),
-              InkWell(
-                child: _buildTextContainer(context, 'Ingredients'),
-                onTap: () => Navigator.of(context).push(MaterialPageRoute(
-                    builder: (_) => MealExtraDetail(
-                        _buildIngredientsListView(context, selectedMeal),
-                        selectedMeal.title,
-                        'Ingredients'))),
-              ),
-              Container(
+              height: 150,
+              width: 300,
+              child: _buildIngredientsListView(context, selectedMeal),
+            ),
+            InkWell(
+              child: _buildTextContainer(context, 'Steps'),
+              onTap: () => Navigator.of(context).push(MaterialPageRoute(
+                  builder: (_) => MealExtraDetail(
+                      _buildStepsListView(context, selectedMeal),
+                      selectedMeal.title,
+                      'Steps'))),
+            ),
+            Container(
                 padding: const EdgeInsets.all(5),
                 decoration: BoxDecoration(
-                  border: Border.all(),
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                height: 150,
-                width: 300,
-                child: _buildIngredientsListView(context, selectedMeal),
-              ),
-              InkWell(
-                child: _buildTextContainer(context, 'Steps'),
-                onTap: () => Navigator.of(context).push(MaterialPageRoute(
-                    builder: (_) => MealExtraDetail(
-                        _buildStepsListView(context, selectedMeal),
-                        selectedMeal.title,
-                        'Steps'))),
-              ),
-              Container(
-                  padding: const EdgeInsets.all(5),
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      border: Border.all(),
-                      borderRadius: BorderRadius.circular(10)),
-                  height: 200,
-                  child: _buildStepsListView(context, selectedMeal)),
-            ],
-          ),
-        ));
+                    color: Colors.white,
+                    border: Border.all(),
+                    borderRadius: BorderRadius.circular(10)),
+                height: 200,
+                child: _buildStepsListView(context, selectedMeal)),
+          ],
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.white,
+        foregroundColor: Theme.of(context).accentColor,
+        child: isFavourite(mealId)
+            ? Icon(
+                Icons.favorite,
+              )
+            : Icon(Icons.favorite_border),
+        onPressed: () {
+          toggleFavourite(mealId);
+        },
+      ),
+    );
   }
 }
