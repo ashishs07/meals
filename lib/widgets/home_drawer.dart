@@ -3,18 +3,6 @@ import 'package:flutter/material.dart';
 import '../screens/filters_screen.dart';
 
 class HomeDrawer extends StatelessWidget {
-  Widget _buildDrawerListTile(
-      BuildContext context, String title, IconData icon, Function tapHandler) {
-    return ListTile(
-      title: Text(
-        title,
-        style: Theme.of(context).textTheme.title,
-      ),
-      trailing: Icon(icon),
-      onTap: tapHandler,
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -49,6 +37,18 @@ class HomeDrawer extends StatelessWidget {
           Divider(thickness: 2),
         ],
       ),
+    );
+  }
+
+  Widget _buildDrawerListTile(
+      BuildContext context, String title, IconData icon, Function tapHandler) {
+    return ListTile(
+      title: Text(
+        title,
+        style: Theme.of(context).textTheme.title,
+      ),
+      trailing: Icon(icon),
+      onTap: tapHandler,
     );
   }
 }

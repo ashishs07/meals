@@ -12,18 +12,6 @@ class CategoryItem extends StatelessWidget {
     @required this.categoryColor,
   });
 
-  BoxDecoration _buildBoxDecoration() {
-    return BoxDecoration(
-      borderRadius: BorderRadius.circular(10),
-      color: categoryColor,
-      gradient: LinearGradient(
-        colors: [categoryColor.withOpacity(0.7), categoryColor],
-        begin: Alignment.topLeft,
-        end: Alignment.bottomRight,
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -42,6 +30,18 @@ class CategoryItem extends StatelessWidget {
       }),
       splashColor: categoryColor,
       borderRadius: BorderRadius.circular(15),
+    );
+  }
+
+  BoxDecoration _buildBoxDecoration() {
+    return BoxDecoration(
+      borderRadius: BorderRadius.circular(10),
+      color: categoryColor,
+      gradient: LinearGradient(
+        colors: [categoryColor.withOpacity(0.7), categoryColor],
+        begin: Alignment.topLeft,
+        end: Alignment.bottomRight,
+      ),
     );
   }
 }

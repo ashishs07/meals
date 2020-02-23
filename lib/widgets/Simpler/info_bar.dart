@@ -47,16 +47,6 @@ class InfoBar extends StatelessWidget {
     }
   }
 
-  Widget buildRow(IconData icon, String text) {
-    return Row(
-      children: <Widget>[
-        Icon(icon),
-        SizedBox(width: 5),
-        Text(text),
-      ],
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -69,6 +59,16 @@ class InfoBar extends StatelessWidget {
           buildRow(Icons.attach_money, affordabilityText),
         ],
       ),
+    );
+  }
+
+  Widget buildRow(IconData icon, String text) {
+    return Row(
+      children: <Widget>[
+        Icon(icon),
+        SizedBox(width: 5),
+        Text(text),
+      ],
     );
   }
 }

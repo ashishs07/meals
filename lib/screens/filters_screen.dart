@@ -22,15 +22,6 @@ class _FiltersScreenState extends State<FiltersScreen> {
     'lactose': false,
   };
 
-  Widget _buildFilterSwitch(
-      String title, String description, bool filter, Function updateValue) {
-    return SwitchListTile(
-        title: Text(title),
-        value: filter,
-        subtitle: Text(description),
-        onChanged: updateValue);
-  }
-
   @override
   void initState() {
     _filters['gluten'] = widget.currentFilters['gluten'];
@@ -105,5 +96,14 @@ class _FiltersScreenState extends State<FiltersScreen> {
         ),
       ),
     );
+  }
+
+  Widget _buildFilterSwitch(
+      String title, String description, bool filter, Function updateValue) {
+    return SwitchListTile(
+        title: Text(title),
+        value: filter,
+        subtitle: Text(description),
+        onChanged: updateValue);
   }
 }

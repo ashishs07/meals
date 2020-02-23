@@ -64,32 +64,3 @@ class _TabsScreenState extends State<TabsScreen> {
     );
   }
 }
-
-/* TopNavigationBar
-DefaultTabController(
-      length: 2,
-      child: Scaffold(
-        appBar: AppBar(
-          title: Text('Meals'),
-          bottom: TabBar(
-            tabs: <Widget>[
-              Tab(
-                icon: Icon(Icons.category),
-                text: 'All',
-              ),
-              Tab(
-                icon: Icon(Icons.favorite_border),
-                text: 'Fav',
-              ),
-            ],
-          ),
-        ),
-        body: TabBarView(
-          children: <Widget>[
-            CategoryScreens(),
-            FavouriteScreen(),
-          ],
-        ),
-      ),
-    ) 
-*/
